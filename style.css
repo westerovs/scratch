@@ -1,0 +1,25 @@
+body {
+  padding: 20px 0;
+  background-color: black;
+  touch-action: none;
+}
+
+.container {
+  position: relative;
+  width: 400px;
+  height: 287px;
+  margin: 0 auto;
+  border: 3px solid yellow;
+  background-color: gray;
+  user-select: none;
+}
+
+.canvas {
+  position: absolute;
+  top: 0;
+}
+
+.form {
+  padding: 20px;
+  visibility: hidden;
+}
