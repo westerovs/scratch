@@ -2,6 +2,7 @@ body {
   padding: 20px 0;
   background-color: black;
   touch-action: none;
+  color: white;
 }
 
 .container {
@@ -11,6 +12,7 @@ body {
   margin: 0 auto;
   border: 3px solid yellow;
   background-color: gray;
+  background-image: linear-gradient(40deg, blue, green, black);
   user-select: none;
 }
 

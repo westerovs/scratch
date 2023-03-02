@@ -12,7 +12,7 @@ class Scratch {
   
   init = () => {
     const image = new Image()
-    image.src = './images/cover.jpg'
+    image.src = './images/cover.png'
     image.onload = () => {
       this.canvas.width = image.naturalWidth
       this.canvas.height = image.naturalHeight
@@ -91,6 +91,7 @@ class Scratch {
     
     const percentFindPixels = this.getFilledInPixels(50)
   
+    console.log(`cleared: ${percentFindPixels}%`)
     if (percentFindPixels > 50) this.canvas.remove()
   }
   
@@ -105,7 +106,6 @@ class Scratch {
     const total = (pixelDataLength / stride)
     
     let counter = 0
-    console.log(parseInt(pixelData[0]))
     
     // Iterate over all pixels
     for (let i = 0; i < pixelDataLength; i += stride) {
