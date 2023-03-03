@@ -1,29 +1,43 @@
 class Scratch {
-  constructor() {
-    this.canvas = document.getElementById('js-canvas')
-    this.ctx = this.canvas.getContext('2d')
+  constructor(container) {
+    this.container = container
+    this.canvas = null
+    this.ctx = null
   
+    this.cover = new Image()
+    this.cover.src = './images/cover.png'
     this.brush = new Image()
     this.brush.src = './images/brush.png'
   
     this.isDrawing = null
     this.lastPoint = null
+    
+    this.init()
   }
   
   init = () => {
-    const image = new Image()
-    image.src = './images/cover.png'
-    image.onload = () => {
-      this.canvas.width = image.naturalWidth
-      this.canvas.height = image.naturalHeight
-      
-      this.ctx.drawImage(image, 0, 0)
-      document.querySelector('.form').style.visibility = 'visible'
+    this.createCanvas()
+    
+    this.cover.onload = () => this.onload()
+  }
   
-      this.canvas.addEventListener('pointerdown', this.handlePointerDown)
-      this.canvas.addEventListener('pointermove', this.handlePointerMove)
-      this.canvas.addEventListener('pointerup', this.handlePointerUp)
-    }
+  createCanvas = () => {
+    this.canvas = document.createElement('canvas')
+    this.canvas.classList.add('canvas')
+    this.container.append(this.canvas)
+    this.ctx = this.canvas.getContext('2d')
+  }
+  
+  onload = () => {
+    this.canvas.width = this.cover.naturalWidth
+    this.canvas.height = this.cover.naturalHeight
+  
+    this.ctx.drawImage(this.cover, 0, 0)
+    document.querySelector('.form').style.visibility = 'visible'
+  
+    this.canvas.addEventListener('pointerdown', this.handlePointerDown)
+    this.canvas.addEventListener('pointermove', this.handlePointerMove)
+    this.canvas.addEventListener('pointerup', this.handlePointerUp)
   }
   
   // ------------ POINTERS -----------------
@@ -75,7 +89,6 @@ class Scratch {
     this.isDrawing = false
   }
   // --------------------------------------
-  
   // вычисляет длину захвата
   distanceBetween = (point1, point2) => {
     return Math.sqrt(Math.pow(point2.x - point1.x, 2) + Math.pow(point2.y - point1.y, 2))
@@ -118,4 +131,5 @@ class Scratch {
   }
 }
 
-new Scratch().init()
+const container = document.querySelector('.container')
+new Scratch(container)
